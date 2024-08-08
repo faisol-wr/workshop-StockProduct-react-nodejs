@@ -1,23 +1,21 @@
-import { Delete, Photo, Send } from "@mui/icons-material"
-import { Button, Stack } from "@mui/material"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import AuthLayout from "./layouts/AuthLayout"
+import Login from "./pages/Login"
+import BackendLayout from "./layouts/BackendLayout"
+import Dashboard from "./pages/Dashboard"
 
 function App() {
-
   return (
-    <>
-      <h1>MUI Button</h1>
-      <Stack spacing={2} direction="row">
-        <Button variant="text">Text</Button>
-        <Button variant="contained">Contained</Button>
-        <Button variant="outlined">Outlined</Button>
-      </Stack>
-      <h3>MUI Button with Icon</h3>
-      <Stack direction="row" spacing={2}>
-        <Button variant="text" startIcon={<Delete />}>Delete</Button>
-        <Button variant="contained" startIcon={<Send />}>Send</Button>
-        <Button variant="outlined" startIcon={<Photo />}>Photo</Button>
-      </Stack>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route element={<BackendLayout />}>
+          <Route path="/backend/dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
