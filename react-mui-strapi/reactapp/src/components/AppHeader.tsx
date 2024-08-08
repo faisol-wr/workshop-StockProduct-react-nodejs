@@ -14,7 +14,7 @@ const AppHeader = () => {
                 <Box
                     component={'img'}
                     sx={styles.appLogo}
-                    src="/assets/logo.jpg" />
+                    src="/assets/logo_dash.avif" />
                 <Box sx={{ flexGrow: 1 }} />
                 <IconButton title="Settings" color="secondary">
                     <SettingsIcon />
