@@ -1,4 +1,9 @@
+import { PRODUCT_TITLE, SYSTEM_NAME } from "../config/constants"
+
 const Product = () => {
+
+    document.title = PRODUCT_TITLE + ' | ' + SYSTEM_NAME
+
     return (
         <>
             <h1>Product</h1>
