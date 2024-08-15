@@ -5,12 +5,17 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined'
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined'
 import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined'
 import { Link } from "react-router-dom"
+import { useState } from "react"
+import { DASHBOARD_PATH, PRODUCT_PATH, REPORT_PATH, SETTING_PATH } from "../config/constants"
 
 const SideNav = () => {
 
     const { collapsed, toggleSidebar } = useProSidebar()
 
-    const handleMenuClick = () => {
+    const [activeMenuItem, setActiveMenuItem] = useState('')
+
+    const handleMenuClick = (menu: string) => {
+        setActiveMenuItem(menu)
         toggleSidebar()
     }
 
@@ -29,30 +34,38 @@ const SideNav = () => {
 
             <Menu
                 menuItemStyles={{
-
+                    button: ({ active }) => {
+                        return {
+                            backgroundColor: active ? '#EEEEEE' : 'transparent',
+                        }
+                    }
                 }}>
                 <MenuItem
-                    component={<Link to="/backend/dashboard" />}
+                    active={activeMenuItem === DASHBOARD_PATH}
+                    component={<Link to={DASHBOARD_PATH} />}
                     icon={<DashboardOutlinedIcon />}
-                    onClick={() => handleMenuClick()}>
+                    onClick={() => handleMenuClick(DASHBOARD_PATH)}>
                     <Typography variant="body2">Dashboard</Typography>
                 </MenuItem>
                 <MenuItem
-                    component={<Link to="/backend/product" />}
+                    active={activeMenuItem === PRODUCT_PATH}
+                    component={<Link to={PRODUCT_PATH} />}
                     icon={<SourceOutlinedIcon />}
-                    onClick={() => handleMenuClick()}>
+                    onClick={() => handleMenuClick(PRODUCT_PATH)}>
                     <Typography variant="body2">Product </Typography>
                 </MenuItem>
                 <MenuItem
-                    component={<Link to="/backend/report" />}
+                    active={activeMenuItem === REPORT_PATH}
+                    component={<Link to={REPORT_PATH} />}
                     icon={<AnalyticsOutlinedIcon />}
-                    onClick={() => handleMenuClick()}>
+                    onClick={() => handleMenuClick(REPORT_PATH)}>
                     <Typography variant="body2">Report </Typography>
                 </MenuItem>
                 <MenuItem
-                    component={<Link to="/backend/setting" />}
+                    active={activeMenuItem === SETTING_PATH}
+                    component={<Link to={SETTING_PATH} />}
                     icon={<StyleOutlinedIcon />}
-                    onClick={() => handleMenuClick()}>
+                    onClick={() => handleMenuClick(SETTING_PATH)}>
                     <Typography variant="body2">Setting </Typography>
                 </MenuItem >
             </Menu >
