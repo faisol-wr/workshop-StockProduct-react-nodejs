@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography } from "@mui/material"
-import { Menu, MenuItem, Sidebar } from "react-pro-sidebar"
+import { Menu, MenuItem, Sidebar, useProSidebar } from "react-pro-sidebar"
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined'
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined'
@@ -7,6 +7,13 @@ import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined'
 import { Link } from "react-router-dom"
 
 const SideNav = () => {
+
+    const { collapsed, toggleSidebar } = useProSidebar()
+
+    const handleMenuClick = () => {
+        toggleSidebar()
+    }
+
     return (
         <Sidebar
             style={{ height: "100%", top: 'auto' }}
@@ -15,8 +22,9 @@ const SideNav = () => {
         >
             <Box sx={styles.avatarContainer}>
                 <Avatar sx={styles.avatar} alt="Masoud" src="/assets/profile.webp" />
-                <Typography variant="body2" sx={styles.yourChannel}>Fanas Dom</Typography>
-                <Typography variant="body2">Administrator</Typography>
+                {!collapsed &&
+                    <>  <Typography variant="body2" sx={styles.yourChannel}>Fanas Dom</Typography>
+                        <Typography variant="body2">Administrator</Typography></>}
             </Box>
 
             <Menu
@@ -24,23 +32,27 @@ const SideNav = () => {
 
                 }}>
                 <MenuItem
-                    component={<Link to="/backend/dashboard"/>}
-                    icon={<DashboardOutlinedIcon />}> 
-                    <Typography variant="body2">Dashboard</Typography> 
+                    component={<Link to="/backend/dashboard" />}
+                    icon={<DashboardOutlinedIcon />}
+                    onClick={() => handleMenuClick()}>
+                    <Typography variant="body2">Dashboard</Typography>
                 </MenuItem>
-                <MenuItem 
-                    component={<Link to="/backend/product"/>}
-                    icon={<SourceOutlinedIcon />}> 
+                <MenuItem
+                    component={<Link to="/backend/product" />}
+                    icon={<SourceOutlinedIcon />}
+                    onClick={() => handleMenuClick()}>
                     <Typography variant="body2">Product </Typography>
                 </MenuItem>
-                <MenuItem 
-                    component={<Link to="/backend/report"/>}
-                    icon={<AnalyticsOutlinedIcon />}> 
+                <MenuItem
+                    component={<Link to="/backend/report" />}
+                    icon={<AnalyticsOutlinedIcon />}
+                    onClick={() => handleMenuClick()}>
                     <Typography variant="body2">Report </Typography>
                 </MenuItem>
-                <MenuItem 
-                    component={<Link to="/backend/setting"/>}
-                    icon={<StyleOutlinedIcon />}> 
+                <MenuItem
+                    component={<Link to="/backend/setting" />}
+                    icon={<StyleOutlinedIcon />}
+                    onClick={() => handleMenuClick()}>
                     <Typography variant="body2">Setting </Typography>
                 </MenuItem >
             </Menu >
