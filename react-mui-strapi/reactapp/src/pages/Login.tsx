@@ -1,5 +1,6 @@
 import { Grid, TextField, Button, Box, Container, Typography, Checkbox, FormControlLabel, Link } from "@mui/material"
 import { useForm } from "react-hook-form"
+import api from "../../services/authUserAPI"
 
 const Login = () => {
 
@@ -8,7 +9,24 @@ const Login = () => {
 
     // onSubmit function
     const onSubmit = (data: any) => {
-        console.log(data)
+        const authData = {
+            identifier: data.username,
+            password: data.password
+        }
+
+        api.authLogin(authData).then((response: any) => {
+            console.log(response)
+            if (response.status === 200) {
+                // save token to local storage
+                localStorage.setItem("token", response.data.jwt)
+
+                // redirect to dashboard
+                window.location.href = "/backend/dashboard"
+            }
+        }).catch((error) => {
+            console.log(error)
+            alert("Login failed")
+        })
     }
 
     return (
